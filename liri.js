@@ -25,6 +25,15 @@ switch (command) {
           bitKey
       )
       .then(function(response) {
+        fs.appendFile(
+          "log.txt",
+          "Concert: " + searchTerm + JSON.stringify(response.data[0]) + "\n",
+          function(err) {
+            if (err) throw err;
+            console.log(response.data[0]);
+            console.log("Saved!");
+          }
+        );
         console.log(response.data[0]);
       });
     break;
@@ -38,16 +47,37 @@ switch (command) {
       if (err) {
         return console.log("Error occurred: " + err);
       }
-      console.log(data.tracks.items[0]);
+      fs.appendFile(
+        "log.txt",
+        "Song: " + searchTerm + JSON.stringify(data.tracks.items[0]) + "\n",
+        function(err) {
+          if (err) throw err;
+          console.log(data.tracks.items[0]);
+          console.log("Saved!");
+        }
+      );
     });
     break;
 
   // movie-this           example: node liri.js movie-this '<movie name here>'
   case "movie-this":
     axios
-      .get("http://www.omdbapi.com/?i=tt3896198&apikey=" + omdbKey.id)
+      .get(
+        "http://www.omdbapi.com/?t=" +
+          encodeURI(searchTerm) +
+          "&apikey=" +
+          encodeURI(omdbKey.id)
+      )
       .then(function(response) {
-        console.log(response);
+        fs.appendFile(
+          "log.txt",
+          "Movie: " + searchTerm + JSON.stringify(response.data) + "\n",
+          function(err) {
+            if (err) throw err;
+            console.log(response.data);
+            console.log("Saved!");
+          }
+        );
       });
     break;
 
@@ -63,7 +93,18 @@ switch (command) {
         if (err) {
           return console.log("Error occurred: " + err);
         }
-        console.log(data.tracks.items[0]);
+        fs.appendFile(
+          "log.txt",
+          "File Search: " +
+            searchTerm +
+            JSON.stringify(data.tracks.items[0]) +
+            "\n",
+          function(err) {
+            if (err) throw err;
+            console.log(data.tracks.items[0]);
+            console.log("Saved!");
+          }
+        );
       }
     );
     break;
