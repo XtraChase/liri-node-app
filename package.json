@@ -24,7 +24,7 @@
     "fs": "0.0.1-security",
     "lodash.template": "^4.5.0",
     "lodash.update": "^4.10.2",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "node-spotify-api": "^1.1.1",
     "omdb": "^0.8.0",
     "spotify": "^0.3.0"
